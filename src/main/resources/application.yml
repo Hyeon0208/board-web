@@ -1,5 +1,7 @@
 # database 연동 설정
 spring:
+  profiles:
+    include: oauth
   datasource:
       driver-class-name: org.h2.Driver
       url: jdbc:h2:tcp://localhost/~/board
@@ -16,4 +18,6 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
+#      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      dialect: org.hibernate.dialect.PostgreSQLDialect
       ddl-auto: create

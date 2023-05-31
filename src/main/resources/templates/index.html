@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<th:block layout:fragment="content">
+    <h1>게시판 웹 서비스</h1>
+    <div class="col-md-12">
+        <!-- 로그인 기능 영력 -->
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary" th:onclick="|location.href='@{/posts/save}'|" type="button">글 등록하러 가기</button>
+                <span th:if="${userName}"> <!-- userName이 존재하는 경우 -->
+                Logged in as : <span id="user" th:text="${userName}"></span>
+                <a href="/logout" role="button" class="btn btn-info active">Logout</a>
+                </span>
+
+                <span th:if="${userName == null}"> <!-- userName이 존재하지 않는 경우 -->
+                <button class="btn btn-success active" th:onclick="|location.href='@{/oauth2/authorization/google}'|" type="button">Google Login</button>
+                </span>
+            </div>
+        </div>
+        <br>
+
+    <div class="col-md-12">
+        <!-- 목록 출력 영력 -->
+        <table class="table table-horizontal table-bordered">
+            <tr>
+                <th>게시글 번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>최종수정일</th>
+            </tr>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.id}"></td>
+                <td><a th:href="@{|/posts/update/${post.id}|}" th:text="${post.title}"></a></td> <!-- 타이틀을 클릭하면 해당 게시글의 수정화면으로 이동 -->
+                <td th:text="${post.author}"></td>
+                <td th:text="${post.modifiedDate}"></td>
+            </tr>
+        </table>
+    </div>
+</th:block>
+</html>
+

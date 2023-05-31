@@ -1,7 +1,6 @@
 package com.example.board;
 
-import com.example.board.entitiy.BoardEntity;
-import com.example.board.repository.BoardRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
