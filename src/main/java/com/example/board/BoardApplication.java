@@ -1,5 +1,6 @@
 package com.example.board;
 
+import com.example.board.domain.posts.PostsRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,5 +12,10 @@ public class BoardApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BoardApplication.class, args);
+	}
+
+	@Bean
+	public TestDataInit testDataInit(PostsRepository postsRepository) {
+		return new TestDataInit(postsRepository);
 	}
 }

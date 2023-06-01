@@ -6,6 +6,9 @@ import com.example.board.controller.dto.PostsUpdateRequestDto;
 import com.example.board.domain.posts.Posts;
 import com.example.board.service.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +42,10 @@ public class PostsApiController {
 
 
     @GetMapping("/api/v1/posts/{id}")
-    public PostsResponseDto findById(@PathVariable Long id) {
+    public PostsResponseDto findById(@PathVariable Long id, Model model, @PageableDefault(page = 1) Pageable pageable) {
+        model.addAttribute("page", pageable.getPageNumber());
+
         return postsService.findById(id);
+
     }
 }
